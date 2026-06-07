@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avaliar Pedido — Içougue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥩</text></svg>">
+</head>
+<body>
+<header class="topo" id="topo">
+  <div class="topo-inner">
+    <div class="logo-btn" onclick="irPara('home')">
+      <div class="logo-icone">🥩</div>
+      <span class="logo-nome">Içougue</span>
+    </div>
+
+    <div class="busca-wrap">
+      <button>🔍</button>
+      <input type="text" placeholder="buscar produtos...">
+    </div>
+
+    <nav class="menu-nav">
+      <button class="menu-link" onclick="irPara('home')">início</button>
+      <button class="menu-link" onclick="irPara('levantamento')">estoque</button>
+      <button class="menu-link" onclick="irPara('painel')">painel</button>
+    </nav>
+
+    <button class="btn-topo btn-claro" onclick="irPara('cadastro')">cadastrar</button>
+    <button class="btn-topo btn-am" onclick="irPara('login')">entrar</button>
+  </div>
+</header>
+<button class="btn-carrinho-float" onclick="irPara('carrinho')" title="Ver carrinho">
+  🛒
+  <span class="contagem-cart" id="num-cart" style="display:none">0</span>
+</button>
+<div class="area-toast" id="area-toast"></div>
+<main>
+<div class="migalhas">
+    <span class="link" onclick="irPara('home')">Início</span>
+    <span class="sep">›</span>
+    <span>Avaliar Pedido</span>
+  </div>
+
+  <div style="max-width:620px;margin:0 auto;padding:30px 20px">
+
+    <div style="background:var(--bco);border-radius:var(--r);box-shadow:var(--sombra);padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;gap:14px">
+      <div style="width:48px;height:48px;background:rgba(200,16,46,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📦</div>
+      <div>
+        <div style="font-weight:800;font-size:.9rem">Pedido #4515 — Açougue Boi de Ouro</div>
+        <div style="font-size:.78rem;color:var(--cin2);margin-top:2px">Entregue em 14/01/2026 • Picanha Bovina 1kg</div>
+      </div>
+    </div>
+
+    <div class="caixa-form">
+      <h1 class="form-tit" style="font-size:1.4rem">Como foi sua experiência?</h1>
+      <p style="text-align:center;font-size:.87rem;color:var(--cin2);margin-bottom:28px">Sua opinião ajuda outros clientes 🙏</p>
+
+      <form id="form-av" onsubmit="enviarAv(event)">
+
+        <div style="text-align:center;margin-bottom:28px">
+          <label class="campo-label" style="display:block;margin-bottom:12px;text-align:center">Nota Geral *</label>
+          <div class="estrelas-wrap" id="est-geral">
+            <span class="est-grande" onclick="clicarEstrela('geral',1)">⭐</span>
+            <span class="est-grande" onclick="clicarEstrela('geral',2)">⭐</span>
+            <span class="est-grande" onclick="clicarEstrela('geral',3)">⭐</span>
+            <span class="est-grande" onclick="clicarEstrela('geral',4)">⭐</span>
+            <span class="est-grande" onclick="clicarEstrela('geral',5)">⭐</span>
+          </div>
+          <div id="lbl-nota" style="font-size:.84rem;color:var(--cin2);margin-top:8px;min-height:18px"></div>
+          <input type="hidden" id="nota-geral" value="0">
+        </div>
+
+        <!-- sub critérios -->
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;border-top:1px solid var(--cin3);padding-top:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <label class="campo-label" style="margin:0">🥩 Qualidade das Carnes</label>
+            <div id="est-qualidade" style="display:flex;gap:4px">
+              <span class="est-mini" onclick="clicarMini('qualidade',1)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('qualidade',2)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('qualidade',3)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('qualidade',4)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('qualidade',5)">⭐</span>
+            </div>
+            <input type="hidden" id="nota-qualidade" value="0">
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <label class="campo-label" style="margin:0">🛵 Velocidade da Entrega</label>
+            <div id="est-entrega" style="display:flex;gap:4px">
+              <span class="est-mini" onclick="clicarMini('entrega',1)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('entrega',2)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('entrega',3)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('entrega',4)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('entrega',5)">⭐</span>
+            </div>
+            <input type="hidden" id="nota-entrega" value="0">
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <label class="campo-label" style="margin:0">💬 Atendimento</label>
+            <div id="est-atendimento" style="display:flex;gap:4px">
+              <span class="est-mini" onclick="clicarMini('atendimento',1)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('atendimento',2)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('atendimento',3)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('atendimento',4)">⭐</span>
+              <span class="est-mini" onclick="clicarMini('atendimento',5)">⭐</span>
+            </div>
+            <input type="hidden" id="nota-atendimento" value="0">
+          </div>
+        </div>
+
+        <div class="campo-grupo">
+          <label class="campo-label">O que você achou? (opcional)</label>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <button type="button" class="tag-rapida" onclick="this.classList.toggle('marcada')">🥩 Carne fresca</button>
+            <button type="button" class="tag-rapida" onclick="this.classList.toggle('marcada')">⚡ Entrega rápida</button>
+            <button type="button" class="tag-rapida" onclick="this.classList.toggle('marcada')">👌 Corte perfeito</button>
+            <button type="button" class="tag-rapida" onclick="this.classList.toggle('marcada')">💰 Bom preço</button>
+            <button type="button" class="tag-rapida" onclick="this.classList.toggle('marcada')">📦 Bem embalado</button>
+            <button type="button" class="tag-rapida" onclick="this.classList.toggle('marcada')">⏰ Atrasou</button>
+          </div>
+        </div>
+
+        <div class="campo-grupo" style="margin-top:16px">
+          <label class="campo-label" for="av-comentario">Comentário (opcional)</label>
+          <textarea class="campo-input" id="av-comentario" rows="3" placeholder="Conte mais sobre sua experiência..."></textarea>
+        </div>
+
+        <div class="campo-grupo">
+          <div class="check-linha">
+            <input type="checkbox" id="av-anonimo">
+            <label for="av-anonimo">Publicar como anônimo</label>
+          </div>
+        </div>
+
+        <button class="m-btn m-btn-vm" type="submit" style="width:100%;justify-content:center;padding:13px">
+          ⭐ Enviar Avaliação
+        </button>
+      </form>
+    </div>
+
+    <!-- avaliações antigas -->
+    <div style="margin-top:28px">
+      <h2 class="secao-tit" style="margin-bottom:14px">Avaliações Recentes</h2>
+
+      <div class="card-avaliacao">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <strong>Pedro H.</strong>
+          <span style="color:#f5a623">★★★★★ <span style="font-size:.72rem;color:var(--cin2);font-weight:400">há 2 dias</span></span>
+        </div>
+        <p style="font-size:.86rem;color:var(--cin);line-height:1.6">Picanha espetacular! Veio bem fresca, corte perfeito. Entregou em 35 minutos. Recomendo muito!</p>
+        <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap">
+          <span class="etiqueta">🥩 Carne fresca</span>
+          <span class="etiqueta">⚡ Entrega rápida</span>
+        </div>
+      </div>
+
+      <div class="card-avaliacao">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
+          <strong>Anônimo</strong>
+          <span style="color:#f5a623">★★★★☆ <span style="font-size:.72rem;color:var(--cin2);font-weight:400">há 5 dias</span></span>
+        </div>
+        <p style="font-size:.86rem;color:var(--cin);line-height:1.6">Boa qualidade, atendimento ótimo. Atrasou um pouco mas valeu a pena.</p>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="rodape">
+  <div class="rodape-inner">
+    <div class="rodape-marca">
+      <div class="nome-marca">🥩 Içougue</div>
+      <p>A plataforma que conecta você aos melhores açougues da sua região.</p>
+    </div>
+    <div class="rodape-col">
+      <h4>Navegação</h4>
+      <a onclick="irPara('home')">Início</a>
+      <a onclick="irPara('levantamento')">Estoque</a>
+      <a onclick="irPara('cadastro')">Cadastro</a>
+      <a onclick="irPara('login')">Login</a>
+    </div>
+    <div class="rodape-col">
+      <h4>Painel</h4>
+      <a onclick="irPara('painel')">Pedidos do Açougue</a>
+      <a onclick="irPara('cad-produto')">Cadastrar Produto</a>
+      <a onclick="irPara('avaliacao')">Avaliações</a>
+    </div>
+    <div class="rodape-col">
+      <h4>Atendimento</h4>
+      <a onclick="irPara('termos')">Termos de Uso</a>
+      <a>Política de Privacidade</a>
+      <a>Fale Conosco</a>
+    </div>
+  </div>
+  <div class="rodape-base">
+    <span>© 2026 Içougue — Projeto Integrador</span>
+    <span>CNPJ: 00.000.000/0001-00</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarCartUI();
+  renderMiniCart();
+  
+});
+</script>
+</body>
+</html>

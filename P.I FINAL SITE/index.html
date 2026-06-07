@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Içougue — Açougue Online — Içougue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥩</text></svg>">
+</head>
+<body>
+<header class="topo" id="topo">
+  <div class="topo-inner">
+    <div class="logo-btn" onclick="irPara('home')">
+      <div class="logo-icone">🥩</div>
+      <span class="logo-nome">Içougue</span>
+    </div>
+
+    <div class="busca-wrap">
+      <button>🔍</button>
+      <input type="text" placeholder="buscar produtos...">
+    </div>
+
+    <nav class="menu-nav">
+      <button class="menu-link" onclick="irPara('home')">início</button>
+      <button class="menu-link" onclick="irPara('levantamento')">estoque</button>
+      <button class="menu-link" onclick="irPara('painel')">painel</button>
+    </nav>
+
+    <button class="btn-topo btn-claro" onclick="irPara('cadastro')">cadastrar</button>
+    <button class="btn-topo btn-am" onclick="irPara('login')">entrar</button>
+  </div>
+</header>
+<button class="btn-carrinho-float" onclick="irPara('carrinho')" title="Ver carrinho">
+  🛒
+  <span class="contagem-cart" id="num-cart" style="display:none">0</span>
+</button>
+<div class="area-toast" id="area-toast"></div>
+<main>
+<!-- HERO -->
+  <div class="hero">
+    <div class="hero-txt">
+      <p class="hero-tag">🔥 Qualidade Premium</p>
+      <h1 class="hero-titulo">Carnes Frescas<br><span>Direto do Açougue</span></h1>
+      <p class="hero-sub">Escolha seus cortes favoritos dos melhores açougues da região.</p>
+      <div class="hero-btns">
+        <button class="m-btn m-btn-vm m-btn-lg" onclick="irPara('home')">ver produtos</button>
+        <button class="m-btn m-btn-bco m-btn-lg">ver açougues</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIAS -->
+  <div class="cats-barra">
+    <div class="cats-lista">
+      <div class="cat-item sel" onclick="selecionarCat(this,'todos')">
+        <div class="cat-icone">🥩</div>
+        <span class="cat-nome">Todos</span>
+      </div>
+      <div class="cat-item" onclick="selecionarCat(this,'bovinos')">
+        <div class="cat-icone">🐄</div>
+        <span class="cat-nome">Bovinos</span>
+      </div>
+      <div class="cat-item" onclick="selecionarCat(this,'suinos')">
+        <div class="cat-icone">🐷</div>
+        <span class="cat-nome">Suínos</span>
+      </div>
+      <div class="cat-item" onclick="selecionarCat(this,'aves')">
+        <div class="cat-icone">🐔</div>
+        <span class="cat-nome">Aves</span>
+      </div>
+      <div class="cat-item" onclick="selecionarCat(this,'costela')">
+        <div class="cat-icone">🦴</div>
+        <span class="cat-nome">Costela</span>
+      </div>
+      <div class="cat-item" onclick="selecionarCat(this,'linguicas')">
+        <div class="cat-icone">🌭</div>
+        <span class="cat-nome">Linguiças</span>
+      </div>
+      <div class="cat-item" onclick="selecionarCat(this,'kits')">
+        <div class="cat-icone">🍖</div>
+        <span class="cat-nome">Kit Churrasco</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER PROMO -->
+  <div class="secao" style="padding-bottom:0">
+    <div class="banner-promo">
+      <div>
+        <p class="promo-tit">Primeira entrega grátis!</p>
+        <p class="promo-desc">Use o cupom <strong>PRIMEIRACOMPRA</strong> no checkout e economize na entrega.</p>
+      </div>
+      <div class="promo-badge">
+        <strong>GRÁTIS</strong>
+        <small>1ª ENTREGA</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACOUGUES -->
+  <div class="secao">
+    <div class="secao-header">
+      <div>
+        <h2 class="secao-tit">Açougues <span>Parceiros</span></h2>
+        <p class="secao-sub">Os melhores estabelecimentos da sua região</p>
+      </div>
+      <span class="ver-mais">Ver todos →</span>
+    </div>
+
+    <div class="grid-acougues">
+      <div class="card-acougue" onclick="irPara('acougue')">
+        <div class="card-ac-foto">
+          <img src="https://www.lagrelha.com.br/painel/dashboard/uploads/noticias/img_news__carnes-nobres-como-identificar-os-diferentes-tipos___la_grelha__1505926828__2009172017120028.jpg" alt="Boi de Ouro">
+          <button class="card-ac-fav" onclick="event.stopPropagation();this.textContent=this.textContent=='♡'?'❤️':'♡'">♡</button>
+        </div>
+        <div class="card-ac-body">
+          <div class="card-ac-nome">Açougue Boi de Ouro</div>
+          <div class="card-ac-meta">
+            <span class="nota"><span class="estrela-am">★</span> 4.7</span>
+            <span>⏱ 25–45 min</span>
+            <span>📍 1,1km</span>
+          </div>
+          <div class="card-ac-tags">
+            <span class="etiqueta">Bovinos</span>
+            <span class="etiqueta">Churrasco</span>
+            <span class="etiqueta etiqueta-ouro">Premium</span>
+          </div>
+          <div class="card-ac-entrega">🛵 Grátis acima de R$ 120</div>
+        </div>
+      </div>
+
+      <div class="card-acougue" onclick="irPara('acougue')">
+        <div class="card-ac-foto">
+          <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&q=80" alt="Casa de Carnes Prime">
+          <button class="card-ac-fav" onclick="event.stopPropagation();this.textContent=this.textContent=='♡'?'❤️':'♡'">♡</button>
+        </div>
+        <div class="card-ac-body">
+          <div class="card-ac-nome">Casa de Carnes Prime</div>
+          <div class="card-ac-meta">
+            <span class="nota"><span class="estrela-am">★</span> 4.8</span>
+            <span>⏱ 30–50 min</span>
+            <span>📍 1,5km</span>
+          </div>
+          <div class="card-ac-tags">
+            <span class="etiqueta">Bovinos</span>
+            <span class="etiqueta">Suínos</span>
+            <span class="etiqueta etiqueta-ouro">Premium</span>
+          </div>
+          <div class="card-ac-entrega">🛵 Grátis acima de R$ 150</div>
+        </div>
+      </div>
+
+      <div class="card-acougue" onclick="irPara('acougue')">
+        <div class="card-ac-foto">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Açougue do Zé">
+          <button class="card-ac-fav" onclick="event.stopPropagation();this.textContent=this.textContent=='♡'?'❤️':'♡'">♡</button>
+        </div>
+        <div class="card-ac-body">
+          <div class="card-ac-nome">Açougue do Zé</div>
+          <div class="card-ac-meta">
+            <span class="nota"><span class="estrela-am">★</span> 4.6</span>
+            <span>⏱ 20–38 min</span>
+            <span>📍 900m</span>
+          </div>
+          <div class="card-ac-tags">
+            <span class="etiqueta">Aves</span>
+            <span class="etiqueta">Suínos</span>
+            <span class="etiqueta etiqueta-verde">Dia a dia</span>
+          </div>
+          <div class="card-ac-entrega">🛵 Grátis acima de R$ 100</div>
+        </div>
+      </div>
+
+      <div class="card-acougue" onclick="irPara('acougue')">
+        <div class="card-ac-foto">
+          <img src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400&q=80" alt="Reserva da Carne">
+          <button class="card-ac-fav" onclick="event.stopPropagation();this.textContent=this.textContent=='♡'?'❤️':'♡'">♡</button>
+        </div>
+        <div class="card-ac-body">
+          <div class="card-ac-nome">Reserva da Carne</div>
+          <div class="card-ac-meta">
+            <span class="nota"><span class="estrela-am">★</span> 4.9</span>
+            <span>⏱ 35–60 min</span>
+            <span>📍 2,3km</span>
+          </div>
+          <div class="card-ac-tags">
+            <span class="etiqueta">Bovinos</span>
+            <span class="etiqueta etiqueta-ouro">Premium</span>
+          </div>
+          <div class="card-ac-entrega">🛵 Grátis acima de R$ 200</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUTOS -->
+  <div style="background:var(--bco); padding: 40px 0;">
+    <div class="secao" style="padding-top:0;padding-bottom:0">
+      <div class="secao-header">
+        <div>
+          <h2 class="secao-tit">Produtos em <span>Destaque</span></h2>
+          <p class="secao-sub">Os cortes mais pedidos da semana</p>
+        </div>
+        <span class="ver-mais">Ver todos →</span>
+      </div>
+
+      <div class="grid-produtos" id="grade-produtos">
+        <!-- preenchido por JS -->
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="rodape">
+  <div class="rodape-inner">
+    <div class="rodape-marca">
+      <div class="nome-marca">🥩 Içougue</div>
+      <p>A plataforma que conecta você aos melhores açougues da sua região.</p>
+    </div>
+    <div class="rodape-col">
+      <h4>Navegação</h4>
+      <a onclick="irPara('home')">Início</a>
+      <a onclick="irPara('levantamento')">Estoque</a>
+      <a onclick="irPara('cadastro')">Cadastro</a>
+      <a onclick="irPara('login')">Login</a>
+    </div>
+    <div class="rodape-col">
+      <h4>Painel</h4>
+      <a onclick="irPara('painel')">Pedidos do Açougue</a>
+      <a onclick="irPara('cad-produto')">Cadastrar Produto</a>
+      <a onclick="irPara('avaliacao')">Avaliações</a>
+    </div>
+    <div class="rodape-col">
+      <h4>Atendimento</h4>
+      <a onclick="irPara('termos')">Termos de Uso</a>
+      <a>Política de Privacidade</a>
+      <a>Fale Conosco</a>
+    </div>
+  </div>
+  <div class="rodape-base">
+    <span>© 2026 Içougue — Projeto Integrador</span>
+    <span>CNPJ: 00.000.000/0001-00</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarCartUI();
+  renderMiniCart();
+  renderProdutos();
+});
+</script>
+</body>
+</html>

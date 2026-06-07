@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Pedidos — Içougue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥩</text></svg>">
+</head>
+<body>
+<header class="topo" id="topo">
+  <div class="topo-inner">
+    <div class="logo-btn" onclick="irPara('home')">
+      <div class="logo-icone">🥩</div>
+      <span class="logo-nome">Içougue</span>
+    </div>
+
+    <div class="busca-wrap">
+      <button>🔍</button>
+      <input type="text" placeholder="buscar produtos...">
+    </div>
+
+    <nav class="menu-nav">
+      <button class="menu-link" onclick="irPara('home')">início</button>
+      <button class="menu-link" onclick="irPara('levantamento')">estoque</button>
+      <button class="menu-link" onclick="irPara('painel')">painel</button>
+    </nav>
+
+    <button class="btn-topo btn-claro" onclick="irPara('cadastro')">cadastrar</button>
+    <button class="btn-topo btn-am" onclick="irPara('login')">entrar</button>
+  </div>
+</header>
+<button class="btn-carrinho-float" onclick="irPara('carrinho')" title="Ver carrinho">
+  🛒
+  <span class="contagem-cart" id="num-cart" style="display:none">0</span>
+</button>
+<div class="area-toast" id="area-toast"></div>
+<main>
+<div class="migalhas">
+    <span class="link" onclick="irPara('home')">Início</span>
+    <span class="sep">›</span>
+    <span>Painel do Açougue</span>
+  </div>
+
+  <div class="secao">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+      <div>
+        <h1 class="secao-tit">Painel de <span>Pedidos</span></h1>
+        <p class="secao-sub">Gerencie os pedidos recebidos em tempo real</p>
+      </div>
+      <button class="m-btn m-btn-vm" onclick="mostrarToast('Pedidos atualizados!','ok')">🔄 Atualizar</button>
+    </div>
+
+    <div class="resumo-painel">
+      <div class="caixa-painel" style="border-left-color:var(--am)">
+        <div class="painel-lbl">Novos</div>
+        <div class="painel-num">3</div>
+      </div>
+      <div class="caixa-painel" style="border-left-color:#e67e22">
+        <div class="painel-lbl">Em preparo</div>
+        <div class="painel-num">2</div>
+      </div>
+      <div class="caixa-painel" style="border-left-color:#3498db">
+        <div class="painel-lbl">Em entrega</div>
+        <div class="painel-num">1</div>
+      </div>
+      <div class="caixa-painel" style="border-left-color:#0a7a2e">
+        <div class="painel-lbl">Entregues hoje</div>
+        <div class="painel-num">8</div>
+      </div>
+      <div class="caixa-painel" style="border-left-color:var(--am)">
+        <div class="painel-lbl">Faturamento hoje</div>
+        <div class="painel-num" style="font-size:1.4rem;color:var(--vm)">R$1.248</div>
+      </div>
+    </div>
+
+    <div class="filtros-status">
+      <button class="btn-filtro ativo" data-st="todos" onclick="filtrarPedidos(this)">Todos</button>
+      <button class="btn-filtro" data-st="novo" onclick="filtrarPedidos(this)">🟡 Novo</button>
+      <button class="btn-filtro" data-st="preparo" onclick="filtrarPedidos(this)">🟠 Em preparo</button>
+      <button class="btn-filtro" data-st="entrega" onclick="filtrarPedidos(this)">🔵 Em entrega</button>
+      <button class="btn-filtro" data-st="entregue" onclick="filtrarPedidos(this)">🟢 Entregue</button>
+      <button class="btn-filtro" data-st="cancelado" onclick="filtrarPedidos(this)">🔴 Cancelado</button>
+    </div>
+
+    <div class="lista-pedidos" id="lista-pedidos"></div>
+  </div>
+</main>
+<footer class="rodape">
+  <div class="rodape-inner">
+    <div class="rodape-marca">
+      <div class="nome-marca">🥩 Içougue</div>
+      <p>A plataforma que conecta você aos melhores açougues da sua região.</p>
+    </div>
+    <div class="rodape-col">
+      <h4>Navegação</h4>
+      <a onclick="irPara('home')">Início</a>
+      <a onclick="irPara('levantamento')">Estoque</a>
+      <a onclick="irPara('cadastro')">Cadastro</a>
+      <a onclick="irPara('login')">Login</a>
+    </div>
+    <div class="rodape-col">
+      <h4>Painel</h4>
+      <a onclick="irPara('painel')">Pedidos do Açougue</a>
+      <a onclick="irPara('cad-produto')">Cadastrar Produto</a>
+      <a onclick="irPara('avaliacao')">Avaliações</a>
+    </div>
+    <div class="rodape-col">
+      <h4>Atendimento</h4>
+      <a onclick="irPara('termos')">Termos de Uso</a>
+      <a>Política de Privacidade</a>
+      <a>Fale Conosco</a>
+    </div>
+  </div>
+  <div class="rodape-base">
+    <span>© 2026 Içougue — Projeto Integrador</span>
+    <span>CNPJ: 00.000.000/0001-00</span>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarCartUI();
+  renderMiniCart();
+  renderPedidos(pedidos);
+});
+</script>
+</body>
+</html>
