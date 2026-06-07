@@ -87,7 +87,9 @@ A plataforma permite que açougues cadastrem seus produtos e recebam pedidos onl
 ## Organização do Repositório
 
 ```
-içougue/
+README.MD
+Versão 3 RUP.PDF
+P.I FINAL SITE/
 ├── index.html
 ├── acougue.html
 ├── avaliacao.html
@@ -101,7 +103,6 @@ içougue/
 ├── termos.html
 ├── style.css
 ├── script.js
-└── README.md
 ```
 
 ---
